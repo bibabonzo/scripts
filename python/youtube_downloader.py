@@ -1,9 +1,9 @@
-from pytube import YouTube
+import pafy
 
 def download_video(url):
-    yt = YouTube(url)
-    video = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
-    video.download()
+  video = pafy.new(url)
+  best = video.getbest(preftype="mp4")
+  best.download()
 
 url = input("Enter the YouTube video URL: ")
 download_video(url)
